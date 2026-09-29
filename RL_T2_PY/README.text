@@ -1,0 +1,141 @@
+
+
+UE {
+    if (first) {
+
+        PlzSetPosTarget(); // 랜덤한 위치로 이동
+        direction = CheckTargetDir();
+
+        // direction == 0 || 1 || 2
+
+        Shared_Mem.TargetDirection = direction;
+        Shared_Mem.TargetDirSetted = true;
+    }
+
+    Shared_Mem = SharedMemoryRegion->GetAddress();
+
+    while (true) {
+        While(true) {
+            if (Shared_Mem->ActionDirSetted == 1) {
+                break;
+            }
+        }
+
+        Shared_Mem->ActionDirSetted = 0;
+
+        ActionDirection = Shared_Mem->ActionDirection
+        Shared_Mem->ActionDirection = 0;
+
+        TargetDirection = checkTargetDir();
+
+        // 정답 비교
+        if(TargetDirection == ActionDirection) {
+            // 정답
+
+            Shared_Memory->Reward = 1;
+        }
+        else{
+            // 틀림
+            Shared_Memory->Reward = -1;
+        }
+
+        Shared_Mem->PrevDirection = TargetDirection
+
+        // 변화
+        // 상대가 움직이거나, 내가 움직이거나
+        if (Shared_Memory.Reward == 1 && TargetDirection == 1) {
+            // 정중앙에서 멈췄다는 의미.
+            // 목표지점에 도달했다.
+            // 그럼 목표지점 리셋
+
+            PlzSetPosTarget(); // 다시 위치 변화
+
+        }else{
+            // 아직 목표지점에 도달하지 못했다. 
+            RotateMachine(ActionDirectionection) {
+                switch(ActionDirectionection) {
+
+                    case 0 : {
+                        AddRotation(0.0f,0.0f, 5.0f);
+                        break;
+                    }
+                    case 1 : {
+                        // stop
+                        break;
+                    }
+                    case 2 :{
+                        AddRotation(0.0f,0.0f, -5.0f);
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        // 다시 한번 체크
+        Shared_Mem.TargetDirection = CheckTargetDir();
+        Shared_Mem.RewaredSetted = true;
+        Shared_Mem.TargetDirSetted = true;
+    }
+}
+
+PY {
+
+    sh_prev_dir_idx = 0
+    sh_target_dir_idx = 4
+    sh_action_dir_idx = 8
+    sh_reward_idx = 12
+    sh_target_dir_setted_idx = 16
+    sh_action_dir_setted_idx = 20
+    sh_reward_setted_idx = 24
+    
+    q_table = tensor.torch([3,3,1])
+
+    while true :
+
+        
+        while True :
+            target_dir_setted = struct.unpack('<i', shared_mem.buffer[sh_target_dir_setted_idx, sh_target_dir_setted_idx+4])
+
+            if target_dir_setted == 1 :
+                break;
+
+            time.sleep(0.01)       
+        shared_mem.buffer[sh_target_dir_setted_idx : sh_target_dir_setted_idx +4] = struct.pack('<i', 0)
+
+        # 목표물 위치 확인
+        target_dir = struct.unpack('<i', shared_mem.buffer[sh_target_dir_idx, sh_target_dir_idx+4])
+        
+        # 판단
+        new_action = -1
+
+        if math.random <= 0.2 :
+            // 랜덤한 판단
+            new_action = math.randint(0,2)
+        else :
+            // 가장 가능성 높은거
+            #q-table[target_dir] # [[],[],[]] 한개짜리 3개 들었어.
+            new_action = q-table[target_dir].argmax().item()
+
+        action_bin = struct.pack('<i', new_action)
+        
+        // 공유메모리 적재
+        shared_mem.buffer[sh_action_dir_idx : sh_action_dir_idx+4] = action_bin
+        shared_mem.buffer[sh_action_dir_setted_idx : sh_action_dir_setted_idx+4] = struct.pack('<i', 1)
+
+        reward_setted = -1
+        
+        while True :
+            reward_setted = struct.unpack('<i', shared_mem.buffer[sh_reward_setted_idx : sh_reward_setted_idx+4])
+            if reward_setted == 1 :
+                break;
+
+        shared_mem.buffer[sh_reward_setted_idx : sh_reward_setted_idx +4] = struct.pack('<i', 0)
+        
+        prev_dir = struct.unpack('<i',shared_mem.buffer[sh_prev_dir_idx : sh_prev_dir_idx+4])       
+        reward = struct.unpack('<i', shared_mem.buffer[sh_reward_idx : sh_reward_idx+4])
+        action_dir = struct.unpack('<i, shared_mem.buffer[sh_action_dir_idx : sh_action_dir_idx+4])
+
+        q_table[prev_dir, action_Dir] += reward        
+
+}
