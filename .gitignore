@@ -1,0 +1,174 @@
+# =============================================================================
+# RL_T2 — Unreal Engine project (RL_T2_UE)
+# =============================================================================
+
+# IDE and generated project files
+/RL_T2_UE/.vs/
+/RL_T2_UE/.vscode/
+/RL_T2_UE/.idea/
+/RL_T2_UE/*.sln
+/RL_T2_UE/*.suo
+/RL_T2_UE/*.opensdf
+/RL_T2_UE/*.sdf
+/RL_T2_UE/*.VC.db
+/RL_T2_UE/*.VC.opendb
+/RL_T2_UE/*.xcodeproj/
+/RL_T2_UE/*.xcworkspace/
+/RL_T2_UE/.vsconfig
+
+# Unreal Engine generated output and caches
+/RL_T2_UE/Binaries/
+/RL_T2_UE/DerivedDataCache/
+/RL_T2_UE/Intermediate/
+/RL_T2_UE/Saved/
+/RL_T2_UE/Plugins/**/Binaries/
+/RL_T2_UE/Plugins/**/Intermediate/
+
+# Packaged builds: retain icons and PakBlacklist configuration files
+/RL_T2_UE/Build/*
+!/RL_T2_UE/Build/*/
+/RL_T2_UE/Build/*/**
+!/RL_T2_UE/Build/*/PakBlacklist*.txt
+!/RL_T2_UE/Build/**/*.ico
+
+# Generated or precompiled assets
+/RL_T2_UE/SourceArt/**/*.png
+/RL_T2_UE/SourceArt/**/*.tga
+/RL_T2_UE/**/*_BuiltData.uasset
+
+# Native build products
+/RL_T2_UE/**/*.slo
+/RL_T2_UE/**/*.lo
+/RL_T2_UE/**/*.o
+/RL_T2_UE/**/*.obj
+/RL_T2_UE/**/*.gch
+/RL_T2_UE/**/*.pch
+/RL_T2_UE/**/*.so
+/RL_T2_UE/**/*.dylib
+/RL_T2_UE/**/*.dll
+/RL_T2_UE/**/*.mod
+/RL_T2_UE/**/*.lai
+/RL_T2_UE/**/*.la
+/RL_T2_UE/**/*.a
+/RL_T2_UE/**/*.lib
+/RL_T2_UE/**/*.exe
+/RL_T2_UE/**/*.out
+/RL_T2_UE/**/*.app
+/RL_T2_UE/**/*.ipa
+
+# =============================================================================
+# RL_T2 — Python project (RL_T2_PY)
+# =============================================================================
+
+# Bytecode and native extensions
+/RL_T2_PY/**/__pycache__/
+/RL_T2_PY/**/*.py[codz]
+/RL_T2_PY/**/*$py.class
+/RL_T2_PY/**/*.so
+
+# Virtual environments and local environment files
+/RL_T2_PY/.venv/
+/RL_T2_PY/venv/
+/RL_T2_PY/env/
+/RL_T2_PY/ENV/
+/RL_T2_PY/env.bak/
+/RL_T2_PY/venv.bak/
+/RL_T2_PY/.env
+/RL_T2_PY/.envrc
+
+# Build, packaging, and installer output
+/RL_T2_PY/.Python
+/RL_T2_PY/build/
+/RL_T2_PY/develop-eggs/
+/RL_T2_PY/dist/
+/RL_T2_PY/downloads/
+/RL_T2_PY/eggs/
+/RL_T2_PY/.eggs/
+/RL_T2_PY/lib/
+/RL_T2_PY/lib64/
+/RL_T2_PY/parts/
+/RL_T2_PY/sdist/
+/RL_T2_PY/var/
+/RL_T2_PY/wheels/
+/RL_T2_PY/share/python-wheels/
+/RL_T2_PY/*.egg-info/
+/RL_T2_PY/.installed.cfg
+/RL_T2_PY/*.egg
+/RL_T2_PY/MANIFEST
+/RL_T2_PY/*.manifest
+/RL_T2_PY/*.spec
+/RL_T2_PY/pip-log.txt
+/RL_T2_PY/pip-delete-this-directory.txt
+
+# Test, coverage, lint, and type-checker caches
+/RL_T2_PY/htmlcov/
+/RL_T2_PY/.tox/
+/RL_T2_PY/.nox/
+/RL_T2_PY/.coverage
+/RL_T2_PY/.coverage.*
+/RL_T2_PY/.cache/
+/RL_T2_PY/nosetests.xml
+/RL_T2_PY/coverage.xml
+/RL_T2_PY/*.cover
+/RL_T2_PY/*.py.cover
+/RL_T2_PY/*.lcov
+/RL_T2_PY/.hypothesis/
+/RL_T2_PY/.pytest_cache/
+/RL_T2_PY/cover/
+/RL_T2_PY/.mypy_cache/
+/RL_T2_PY/.dmypy.json
+/RL_T2_PY/dmypy.json
+/RL_T2_PY/.pyre/
+/RL_T2_PY/.pytype/
+/RL_T2_PY/.ruff_cache/
+/RL_T2_PY/cython_debug/
+
+# Tool and framework-generated local data
+/RL_T2_PY/.ipynb_checkpoints/
+/RL_T2_PY/.pdm-python
+/RL_T2_PY/.pdm-build/
+/RL_T2_PY/.pixi/*
+!/RL_T2_PY/.pixi/config.toml
+/RL_T2_PY/__pypackages__/
+/RL_T2_PY/.pybuilder/
+/RL_T2_PY/target/
+/RL_T2_PY/.scrapy/
+/RL_T2_PY/.ropeproject/
+/RL_T2_PY/.spyderproject
+/RL_T2_PY/.spyproject
+/RL_T2_PY/.abstra/
+/RL_T2_PY/.pypirc
+/RL_T2_PY/tempCodeRunnerFile.py
+/RL_T2_PY/docs/_build/
+/RL_T2_PY/site/
+/RL_T2_PY/instance/
+/RL_T2_PY/.webassets-cache/
+/RL_T2_PY/.streamlit/secrets.toml
+/RL_T2_PY/marimo/_static/
+/RL_T2_PY/marimo/_lsp/
+/RL_T2_PY/__marimo__/
+
+# Application-local data and logs
+/RL_T2_PY/*.log
+/RL_T2_PY/local_settings.py
+/RL_T2_PY/db.sqlite3
+/RL_T2_PY/db.sqlite3-journal
+/RL_T2_PY/celerybeat-schedule*
+/RL_T2_PY/celerybeat.pid
+/RL_T2_PY/*.rdb
+/RL_T2_PY/*.aof
+/RL_T2_PY/*.pid
+/RL_T2_PY/mnesia/
+/RL_T2_PY/rabbitmq/
+/RL_T2_PY/rabbitmq-data/
+/RL_T2_PY/activemq-data/
+
+# =============================================================================
+# Repository-wide OS/editor noise
+# =============================================================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
