@@ -147,13 +147,13 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TObjectPtr<AAIController> RunnerController;
 	
-	// 회전하기 전 상태 저장
+	// 회전 전 각도 저장
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float PrevState; 
+	float PrevAngle; 
 
-	// 회전 후 상태 저장 
+	// 회전 후 각도 저장 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float PostState;
+	float PostAngle;
 
 	// 보상 임시저장
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

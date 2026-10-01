@@ -134,16 +134,16 @@ void AChaser::Tick(float DeltaTime)
 		}
 		case ETrainingProcess::SETTED_ACTION: {
 
-			uint32 Action = SharedMem->Action - 1;			// 0,1,2 -> -1, 0, 1
+			int32 Action = SharedMem->Action - 1;			// 0,1,2 -> -1, 0, 1
 			SharedMem->ActionSetted = 0;
 
-			if (nullptr != Runner) {
+			if (nullptr == Runner) {
 				ActorLog(TEXT("Warning"), TEXT("Runner is not valid"));
 				TrainingProcess = ETrainingProcess::IDLE;
 				break;
 			}
 
-			CheckTargetDir(Runner, PrevState);
+			CheckTargetDir(Runner, PrevAngle);
 			Rotate(Action);
 
 			TickTimer = 0.0f;
@@ -155,7 +155,7 @@ void AChaser::Tick(float DeltaTime)
 
 			TickTimer += DeltaTime;
 
-			if (TickTimer >= 1.0f) {
+			if (TickTimer >= 0.5f) {
 				TickTimer = 0.0f;
 				TrainingProcess = ETrainingProcess::END_ROTATE;
 			}
@@ -164,26 +164,26 @@ void AChaser::Tick(float DeltaTime)
 		}
 		case ETrainingProcess::END_ROTATE: {
 
-			CheckTargetDir(Runner, PostState);
+			CheckTargetDir(Runner, PostAngle);
 
 			Reward_Temp = 0.0f;
 
-			float PrevState_Error = FMath::Abs(PrevState);
-			float PostState_Error = FMath::Abs(PostState);
+			float PrevAngle_Error = FMath::Abs(PrevAngle);
+			float PostAngle_Error = FMath::Abs(PostAngle);
 
-			if (PostState_Error < PrevState_Error) {
+			if (PostAngle_Error < PrevAngle_Error) {
 				// 가까워 졌다.
 				Reward_Temp = 1.0f;
 
 			}
-			else if (PostState_Error > PrevState_Error) {
+			else if (PostAngle_Error > PrevAngle_Error) {
 				// 더 멀여졌다.
 				Reward_Temp = -1.0f;
 			}
 			else {
 				// 변화 없음
 				// 중앙에서 멈춘경우라면, 목적지라 확신했겠지.
-				if (PostState_Error <= 1.0f) {
+				if (PostAngle_Error <= 1.0f) {
 					Reward_Temp = 10.0f;
 				}
 				else {
@@ -192,8 +192,8 @@ void AChaser::Tick(float DeltaTime)
 			}
 
 			// 보상과 다음 상태까지 다 넘겨줘야, 이에 맞게 q-learning 을 한다.
-			SharedMem->CurrentState = AngleToSimpleDirection(PrevState);
-			SharedMem->NextState = AngleToSimpleDirection(PostState);
+			SharedMem->CurrentState = AngleToSimpleDirection(PrevAngle);
+			SharedMem->NextState = AngleToSimpleDirection(PostAngle);
 
 			SharedMem->Reward = Reward_Temp;
 			SharedMem->RewardSetted = 1;
@@ -238,8 +238,10 @@ void AChaser::Tick(float DeltaTime)
 			}
 			else {
 
-				SharedMem->CurrentState = PostState;	// 처음엔 똑같이
-				SharedMem->NextState = PostState;		// 처음엔 똑같이
+				int32 NewState = AngleToSimpleDirection(PostAngle);
+
+				SharedMem->CurrentState = NewState;	
+				SharedMem->NextState = NewState;
 				SharedMem->StateSetted = 1;
 
 				TrainingProcess = ETrainingProcess::WAITING_ACTION;
@@ -378,11 +380,11 @@ void AChaser::ActorLog(const FString& Verbose, const FString& DebugMessage)
 
 int32 AChaser::AngleToSimpleDirection(float angle) const
 {
-	if (angle > 0) {
-		return 2;
-	}
-	else if (angle < 0) {
+	if (angle < -1.0f) {
 		return 0;
+	}
+	else if (angle > 1.0f) {
+		return 2;
 	}
 	else{ // angle == 0
 		return 1;
