@@ -182,10 +182,10 @@ def main():
                     PLOG("보상 왔다!")
                     reward = shared_memory.get_reward()
                     PLOG(f"보상은 : {reward} ")
-                    shared_memory.set_rewardSetted(0)
-                    PLOG(f"rewardSetted = 0")
                     next_state = shared_memory.get_nextState()
                     PLOG(f"다음 상태는 : {next_state}")
+                    shared_memory.set_rewardSetted(0)
+                    PLOG(f"rewardSetted = 0")
                     
                     break
 
